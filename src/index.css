@@ -1,13 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital@0;1&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'EB Garamond', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #222831;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.quote_container {
+  background-color: #EEEEEE;
+  border-radius: 10px;
+  font-size: 24px;
+  letter-spacing: .3rem;
+  line-height: 2.5rem;
+  margin: 0 2rem;
+  padding: 1rem;
+}
+
+h1 {
+  color: #FFD369;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.letters_div {
+  background-color: #393E46;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 12px;
+  margin: 2rem;
+}
+
+.letters_div p {
+  color: #EEEEEE;
+  font-size: 18px;
+  line-height: 2rem;
+  margin: 0;
+  padding: 0 10px;
 }
