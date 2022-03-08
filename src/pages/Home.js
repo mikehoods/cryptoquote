@@ -1,28 +1,53 @@
 import { useEffect, useState } from 'react';
 
+import alphabet from '../utils/alphabet';
+import fisherYatesShuffle from '../utils/fisherYatesShuffle';
 import useFetch from '../hooks/useFetch';
 
 function Home() {
+    const [cryptoquote, setCryptoquote] = useState(null);
+    const [cryptoName, setCryptoName] = useState(null);
+    const [name, setName] = useState(null);
     const [quote, setQuote] = useState(null);
-
+    // const [words, setWords] = useState(null);
+    const [shuffledAlphabet, setShuffledAlphabet] = useState(fisherYatesShuffle);
     const { data, error, isLoading } = useFetch();
+
+    const encrypt = (letter) => {
+        if (letter === letter.toLowerCase()) {
+            return shuffledAlphabet[alphabet.indexOf(letter.toUpperCase())]
+        }
+        if (letter === letter.toUpperCase()) return shuffledAlphabet[alphabet.indexOf(letter)]
+    }
+
+    const encryptQuote = () => {
+        setCryptoquote(quote.split('').map(letter => letter.replace(/[A-Za-z]/, encrypt(letter))).join(''))
+        setCryptoName(name.split('').map(letter => letter.replace(/[A-Za-z]/, encrypt(letter))).join(''))
+    }
 
     useEffect(() => {
         if (data) {
-            setQuote(data)
-        }
-        console.log(quote)
+            setQuote(data.content)
+            setName(data.author)
+        }   
     }, [data])
 
+    // useEffect(() => {
+    //     if (quote) setWords(quote.split(" "))
+    // }, [quote])
+
+    useEffect(() => {
+        if (name && quote && shuffledAlphabet) encryptQuote()
+    }, [quote, name, shuffledAlphabet])
 
     return (
         <div>
             {error && <div>{error}</div>}
-            {quote && <div>
+            {cryptoquote && name && <div>
             <h1>Crypto Quote</h1>
             <div className="quote_container">
-                <p>{quote.content}</p>
-                <p>{quote.originator.name}</p>
+                <p>{cryptoquote}</p>
+                <p>{cryptoName}</p>
             </div>
             <div className="letters_div">
                 <p>A = _</p>
@@ -53,8 +78,7 @@ function Home() {
                 <p>Z = _</p>
             </div>
         </div>}
-        </div>
-        
+        </div> 
     )
 }
 
