@@ -10,20 +10,8 @@ function Home() {
     const [name, setName] = useState(null);
     const [quote, setQuote] = useState(null);
     // const [words, setWords] = useState(null);
-    const [shuffledAlphabet, setShuffledAlphabet] = useState(fisherYatesShuffle);
+    const [shuffledAlphabet, setShuffledAlphabet] = useState(null);
     const { data, error, isLoading } = useFetch();
-
-    const encrypt = (letter) => {
-        if (letter === letter.toLowerCase()) {
-            return shuffledAlphabet[alphabet.indexOf(letter.toUpperCase())]
-        }
-        if (letter === letter.toUpperCase()) return shuffledAlphabet[alphabet.indexOf(letter)]
-    }
-
-    const encryptQuote = () => {
-        setCryptoquote(quote.split('').map(letter => letter.replace(/[A-Za-z]/, encrypt(letter))).join(''))
-        setCryptoName(name.split('').map(letter => letter.replace(/[A-Za-z]/, encrypt(letter))).join(''))
-    }
 
     useEffect(() => {
         if (data) {
@@ -32,11 +20,26 @@ function Home() {
         }   
     }, [data])
 
+    useEffect(() => {
+        if (fisherYatesShuffle) setShuffledAlphabet(fisherYatesShuffle)
+    }, [])
+
     // useEffect(() => {
     //     if (quote) setWords(quote.split(" "))
     // }, [quote])
 
     useEffect(() => {
+        const encrypt = (letter) => {
+            if (letter.match(/[A-Za-z]/)) {
+                if (letter === letter.toLowerCase()) return shuffledAlphabet[alphabet.indexOf(letter.toUpperCase())].toLowerCase()
+                if (letter === letter.toUpperCase()) return shuffledAlphabet[alphabet.indexOf(letter)]
+            }  
+        }
+    
+        const encryptQuote = () => {
+            setCryptoquote(quote.split('').map(letter => letter.replace(/[A-Za-z]/, encrypt(letter))).join(''))
+            setCryptoName(name.split('').map(letter => letter.replace(/[A-Za-z]/, encrypt(letter))).join(''))
+        }
         if (name && quote && shuffledAlphabet) encryptQuote()
     }, [quote, name, shuffledAlphabet])
 
