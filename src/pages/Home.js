@@ -9,8 +9,9 @@ function Home() {
     const [cryptoName, setCryptoName] = useState(null);
     const [name, setName] = useState(null);
     const [quote, setQuote] = useState(null);
-    // const [words, setWords] = useState(null);
+    const [words, setWords] = useState(null);
     const [shuffledAlphabet, setShuffledAlphabet] = useState(null);
+
     const { data, error, isLoading } = useFetch();
 
     useEffect(() => {
@@ -24,9 +25,9 @@ function Home() {
         if (fisherYatesShuffle) setShuffledAlphabet(fisherYatesShuffle)
     }, [])
 
-    // useEffect(() => {
-    //     if (quote) setWords(quote.split(" "))
-    // }, [quote])
+    useEffect(() => {
+        if (cryptoquote) setWords(cryptoquote.split(" "))
+    }, [cryptoquote])
 
     useEffect(() => {
         const encrypt = (letter) => {
@@ -43,14 +44,54 @@ function Home() {
         if (name && quote && shuffledAlphabet) encryptQuote()
     }, [quote, name, shuffledAlphabet])
 
+    const handleChange = (e) => {
+
+    }
+
     return (
         <div>
             {error && <div>{error}</div>}
-            {cryptoquote && name && <div>
+            {words && name && <div>
             <h1>Crypto Quote</h1>
             <div className="quote_container">
-                <p>{cryptoquote}</p>
-                <p>{cryptoName}</p>
+                <div className="phrase_div">{words.map((word, i) => {
+                    return (
+                        <div className="word_div" key={i}> {word.split("").map((char, j) => {
+                            return (
+                                char.match(/[A-Za-z]/) ?
+                                    <div key={j} className="char_container">
+                                        <p className="puzzle_p"><input className={`char_input ${char}`} maxLength="1" onChange={handleChange} type="text" /></p>
+                                        <p className="puzzle_p">{char}</p>
+                                    </div>
+                                    :
+                                    <div key={j}>
+                                        <p className="puzzle_p">{char}</p>
+                                        <p className="puzzle_p">{char}</p>
+                                    </div>
+                            )
+                            })}
+                        </div>
+                    )
+                })}</div>
+                <div className="author_div">{cryptoName.split(" ").map((word, i) => {
+                    return (
+                        <div className="word_div" key={i}> {word.split("").map((char, j) => {
+                            return (
+                                char.match(/[A-Za-z]/) ?
+                                    <div key={j} className="char_container">
+                                        <p className="puzzle_p"><input className={`char_input ${char}`} maxLength="1" onChange={handleChange} type="text" /></p>
+                                        <p className="puzzle_p">{char}</p>
+                                    </div>
+                                    :
+                                    <div key={j}>
+                                        <p className="puzzle_p">{char}</p>
+                                        <p className="puzzle_p">{char}</p>
+                                    </div>
+                            )
+                            })}
+                        </div>
+                    )
+                })}</div>
             </div>
             <div className="letters_div">
                 <p>A = _</p>

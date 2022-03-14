@@ -24,6 +24,43 @@ h1 {
   text-align: center;
 }
 
+.author_div, .phrase_div, .word_div {
+  display: flex;
+}
+
+.author_div {
+  justify-content: flex-end;
+}
+
+.phrase_div {
+  flex-wrap: wrap;
+}
+
+.word_div {
+  padding: 1rem;
+}
+
+.char_container {
+  text-align: center;
+}
+
+.char_input {
+  border: none;
+  border-bottom: 1px solid #222831;
+  border-radius: 6px;
+  font-family: 'EB Garamond', serif;
+  font-size: 24px;
+  margin: 0 6px;
+  max-width: 1.5rem;
+  text-align: center;
+  padding: 6px;
+}
+
+p.puzzle_p {
+  margin: 0;
+  height: 50px;
+}
+
 .letters_div {
   background-color: #393E46;
   border-radius: 10px;
