@@ -60,21 +60,3 @@ p.puzzle_p {
   margin: 0;
   height: 50px;
 }
-
-.letters_div {
-  background-color: #393E46;
-  border-radius: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 12px;
-  margin: 2rem;
-}
-
-.letters_div p {
-  color: #EEEEEE;
-  font-size: 18px;
-  line-height: 2rem;
-  margin: 0;
-  padding: 0 10px;
-}

@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import alphabet from './alphabet'
 
 //modified fisherYatesShuffle that ensures no element remains in its original index
