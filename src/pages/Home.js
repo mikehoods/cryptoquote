@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import alphabet from '../utils/alphabet';
 import EncryptedText from '../components/EncryptedText'
@@ -11,8 +11,6 @@ function Home() {
     const [name, setName] = useState(null);
     const [quote, setQuote] = useState(null);
     const [shuffledAlphabet, setShuffledAlphabet] = useState(null);
-
-    const inputRef = useRef()
 
     const { data, error, isLoading } = useFetch();
 
@@ -54,12 +52,13 @@ function Home() {
 
     return (
         <div>
+            {isLoading && <div>{isLoading}</div>}}
             {error && <div>{error}</div>}
             {cryptoQuote && cryptoName && <div>
             <h1>Crypto Quote</h1>
             <div className="quote_container">
-                <EncryptedText divName="phrase_div" words={cryptoQuote} onChange={handleChange} />
-                <EncryptedText divName="author_div" words={cryptoName} onChange={handleChange} />
+                <EncryptedText divName="phrase_div" words={cryptoQuote} onChange={(e) => handleChange(e)} />
+                <EncryptedText divName="author_div" words={cryptoName} onChange={(e) => handleChange(e)} />
             </div>
         </div>}
         </div> 
