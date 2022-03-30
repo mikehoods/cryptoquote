@@ -45,9 +45,11 @@ function Home() {
     const handleChange = (e) => {
         console.log(e.target.className)
         console.log(document.getElementsByClassName(e.target.className))
-        // const chosenLetterArray = document.getElementsByClassName(e.target.className)
-        // chosenLetterArray = chosenLetterArray.map(letter => letter.value.replace(/[A-Za-z]/, e.target.value))
-        // console.log(chosenLetterArray)
+        let letters = document.getElementsByClassName(e.target.className)
+        for (let i=0; i < letters.length; i++) {
+            letters[i].value = e.target.value
+        }
+       
     }
 
     return (
@@ -56,8 +58,8 @@ function Home() {
             {cryptoQuote && cryptoName && <div>
             <h1>Crypto Quote</h1>
             <div className="quote_container">
-                <EncryptedText divName="phrase_div" words={cryptoQuote} onChange={handleChange} inputRef={inputRef} />
-                <EncryptedText divName="author_div" words={cryptoName} onChange={handleChange} inputRef={inputRef} />
+                <EncryptedText divName="phrase_div" words={cryptoQuote} onChange={handleChange} />
+                <EncryptedText divName="author_div" words={cryptoName} onChange={handleChange} />
             </div>
         </div>}
         </div> 

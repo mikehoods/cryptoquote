@@ -56,6 +56,14 @@ h1 {
   padding: 6px;
 }
 
+.lowercase input {
+  text-transform: lowercase;
+}
+
+.uppercase input {
+  text-transform: uppercase;
+}
+
 p.puzzle_p {
   margin: 0;
   height: 50px;

@@ -1,22 +1,24 @@
-function EncryptedText({ divName, onChange, inputRef, words } ) {
+function EncryptedText({ divName, onChange, words } ) {
     return (
         <div className={divName}>{words.split(" ").map((word, i) => {
             return (
                 <div className="word_div" key={i}> {word.split("").map((char, j) => {
                     return (
-                        char.match(/[A-Za-z]/) ?
-                            <div key={j} className="char_container">
-                                <p className="puzzle_p"><input className={`char_input ${char}`} maxLength="1" onChange={onChange} ref={inputRef} type="text" /></p>
-                                <p className="puzzle_p">{char}</p>
-                            </div>
-                            :
-                            <div key={j}>
-                                <p className="puzzle_p">{char}</p>
-                                <p className="puzzle_p">{char}</p>
-                            </div>
+                        <div key={j} className="char_container">
+                            {char.match(/[A-Za-z]/) ?
+                                char.match(/[A-Z]/) ?
+                                    <div>
+                                        <p className="puzzle_p uppercase"><input className={`char_input ${char.toLowerCase()}`} maxLength="1" onChange={onChange} type="text" /></p>
+                                    </div>
+                                    :<div>
+                                        <p className="puzzle_p lowercase"><input className={`char_input ${char}`} maxLength="1" onChange={onChange} type="text" /></p>
+                                    </div>
+                                : <p className="puzzle_p">{char}</p>
+                            }
+                            <p className="puzzle_p">{char}</p>
+                        </div>
                     )
-                    })}
-                </div>
+                })}</div>
             )
         })}</div>
     )
