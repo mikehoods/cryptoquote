@@ -56,7 +56,7 @@ function Home() {
 
     const handleChange = (e) => {
         let letter = document.getElementsByClassName(e.target.className)
-        for (let i=0; i < letter.length; i++) letter[i].value = e.target.value  
+        for (let i=0; i < letter.length; i++) letter[i].value = e.target.value
     }
 
     const handleClick = () => {
@@ -70,15 +70,20 @@ function Home() {
                 letter = document.getElementsByClassName(`char_input ${shuffledAlphabet[rand]}`)
                 if(letter.length === 0) handleClick()    
             }
-            if (letter.length != 0) setHints([...hints, alphabet[rand]])
-            for (let i=0; i < letter.length; i++) letter[i].value = alphabet[rand]
-            
-        
+            for (let i=0; i < letter.length; i++) {
+                if (letter[i].value === alphabet[rand]) {
+                    handleClick()
+                } else {
+                    letter[i].value = alphabet[rand]
+                    letter[i].style.color = "red"
+                    letter[i].disabled = true  
+                }
+            }
+            setHints([...hints, alphabet[rand]])               
             console.log(`Attempted Hints: ${randLetters}`)
             console.log(`Hints given: ${hints}`)
             console.log(letter)
-        }
-        
+        }     
         console.log(rand, alphabet[rand], shuffledAlphabet[rand])
     }
 

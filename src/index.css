@@ -74,6 +74,10 @@ h1 {
   padding: 4px;
 }
 
+.char_input:disabled {
+  background-color: #FFFFFF;
+}
+
 .lowercase input {
   text-transform: lowercase;
 }
