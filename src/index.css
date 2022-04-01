@@ -8,6 +8,26 @@ body {
   background-color: #222831;
 }
 
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.hint, .used_hint {
+  height: 40px;
+  padding: 4px;
+}
+
+.hint {
+  cursor: pointer;
+}
+
+.used_hint {
+  cursor: not-allowed;
+}
+
 .quote_container {
   background-color: #EEEEEE;
   border-radius: 10px;
@@ -68,8 +88,17 @@ p.puzzle_p {
 }
 
 @media only screen and (max-width: 900px) {
+  .header {
+    padding: 0;
+  }
+  
   h1 {
+    font-size: 2rem;
     margin: 0.5rem;
+  }
+
+  .hint, .used_hint {
+    height: 32px;
   }
 
   .quote_container {
