@@ -10,12 +10,12 @@ import useFetch from '../hooks/useFetch';
 function Home() {
     const [cryptoQuote, setCryptoQuote] = useState(null);
     const [cryptoName, setCryptoName] = useState(null);
-    const [name, setName] = useState(null);
-    const [quote, setQuote] = useState(null);
-    const [shuffledAlphabet, setShuffledAlphabet] = useState(null);
     const [hints, setHints] = useState([]);
     const [hintsGiven, setHintsGiven] = useState([false, false, false])
+    const [name, setName] = useState(null);
+    const [quote, setQuote] = useState(null);
     const [randLetters, setRandLetters] = useState([])
+    const [shuffledAlphabet, setShuffledAlphabet] = useState(null);
 
 
     const { data, error, isLoading } = useFetch();
@@ -80,11 +80,8 @@ function Home() {
                 }
             }
             setHints([...hints, alphabet[rand]])               
-            console.log(`Attempted Hints: ${randLetters}`)
-            console.log(`Hints given: ${hints}`)
-            console.log(letter)
         }     
-        console.log(rand, alphabet[rand], shuffledAlphabet[rand])
+        // console.log(rand, alphabet[rand], shuffledAlphabet[rand])
     }
 
     return (
