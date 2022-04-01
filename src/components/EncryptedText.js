@@ -11,7 +11,7 @@ function EncryptedText({ divName, onChange, words } ) {
                                         <p className="puzzle_p uppercase"><input className={`char_input ${char.toLowerCase()}`} maxlength="1" onChange={onChange} type="text" /></p>
                                     </div>
                                     :<div>
-                                        <p className="puzzle_p lowercase"><input className={`char_input ${char}`} maxLength="1" onChange={onChange} type="text" /></p>
+                                        <p className="puzzle_p lowercase"><input className={`char_input ${char}`} maxlength="1" onChange={onChange} type="text" /></p>
                                     </div>
                                 : <p className="puzzle_p">{char}</p>
                             }
