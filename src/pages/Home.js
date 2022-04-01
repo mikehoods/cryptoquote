@@ -41,26 +41,21 @@ function Home() {
     }, [quote, name, shuffledAlphabet])
 
     const handleChange = (e) => {
-        console.log(e.target.className)
-        console.log(document.getElementsByClassName(e.target.className))
         let letters = document.getElementsByClassName(e.target.className)
-        for (let i=0; i < letters.length; i++) {
-            letters[i].value = e.target.value
-        }
-       
+        for (let i=0; i < letters.length; i++) letters[i].value = e.target.value  
     }
 
     return (
         <div>
-            {isLoading && <div>{isLoading}</div>}}
+            {isLoading && <div>{isLoading}</div>}
             {error && <div>{error}</div>}
             {cryptoQuote && cryptoName && <div>
-            <h1>Crypto Quote</h1>
-            <div className="quote_container">
-                <EncryptedText divName="phrase_div" words={cryptoQuote} onChange={(e) => handleChange(e)} />
-                <EncryptedText divName="author_div" words={cryptoName} onChange={(e) => handleChange(e)} />
-            </div>
-        </div>}
+                <h1>Crypto Quote</h1>
+                <div className="quote_container">
+                    <EncryptedText divName="phrase_div" words={cryptoQuote} onChange={(e) => handleChange(e)} />
+                    <EncryptedText divName="author_div" words={cryptoName} onChange={(e) => handleChange(e)} />
+                </div>
+            </div>}
         </div> 
     )
 }

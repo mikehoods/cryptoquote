@@ -12,8 +12,7 @@ body {
   background-color: #EEEEEE;
   border-radius: 10px;
   font-size: 24px;
-  letter-spacing: .3rem;
-  line-height: 2.5rem;
+  line-height: 2rem;
   margin: 0 2rem;
   padding: 1rem;
 }
@@ -21,19 +20,18 @@ body {
 h1 {
   color: #FFD369;
   font-size: 3rem;
+  margin: 1rem;
   text-align: center;
 }
 
 .author_div, .phrase_div, .word_div {
+  box-sizing: border-box;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .author_div {
   justify-content: flex-end;
-}
-
-.phrase_div {
-  flex-wrap: wrap;
 }
 
 .word_div {
@@ -53,7 +51,7 @@ h1 {
   margin: 0 6px;
   max-width: 1.5rem;
   text-align: center;
-  padding: 6px;
+  padding: 4px;
 }
 
 .lowercase input {
@@ -66,5 +64,32 @@ h1 {
 
 p.puzzle_p {
   margin: 0;
-  height: 50px;
+  height: 45px;
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    margin: 0.5rem;
+  }
+
+  .quote_container {
+    border-radius: 0px;
+    font-size: 20px;
+    line-height: 1.5rem;
+    margin: 0;
+    padding: 6px;
+  }
+
+  .word_div {
+    padding: 0.5rem;
+  }
+
+  p.puzzle_p {
+    height: 35px;
+  }
+
+  .char_input {
+    font-size: 20px;
+    margin: 0 4px;
+  }
 }

@@ -18,8 +18,6 @@ const fisherYatesShuffle = () => {
             [shuffledAlphabet[i], shuffledAlphabet[j]] = [shuffledAlphabet[j], shuffledAlphabet[i]];  // swap, destructuring assignment
         }
     }
-    console.log(alphabet)
-    console.log(shuffledAlphabet)
     return shuffledAlphabet
 }
     
