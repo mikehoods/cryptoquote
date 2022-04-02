@@ -56,7 +56,11 @@ function Home() {
 
     const handleChange = (e) => {
         let letter = document.getElementsByClassName(e.target.className)
-        for (let i=0; i < letter.length; i++) letter[i].value = e.target.value
+        for (let i=0; i < letter.length; i++) {
+            letter[i].value = e.target.value
+            letter[i].style.color = "darkblue"
+        }
+        
     }
 
     const handleClick = () => {
@@ -69,19 +73,23 @@ function Home() {
             if (letter.length === 0) {
                 letter = document.getElementsByClassName(`char_input ${shuffledAlphabet[rand]}`)
                 if(letter.length === 0) handleClick()    
-            }
-            for (let i=0; i < letter.length; i++) {
-                if (letter[i].value === alphabet[rand]) {
+            } else {
+                if (letter[0].value.toUpperCase() === alphabet[rand]) {
                     handleClick()
                 } else {
-                    letter[i].value = alphabet[rand]
-                    letter[i].style.color = "red"
-                    letter[i].disabled = true  
+                    for (let i=0; i < letter.length; i++) {
+                        // console.log(letter)
+                        // console.log(randLetters)
+                        // console.log(rand, alphabet[rand], shuffledAlphabet[rand])
+                        letter[i].value = alphabet[rand]
+                        letter[i].style.color = "red"
+                        letter[i].disabled = true
+                    }
                 }
             }
             setHints([...hints, alphabet[rand]])               
         }     
-        // console.log(rand, alphabet[rand], shuffledAlphabet[rand])
+        
     }
 
     return (
