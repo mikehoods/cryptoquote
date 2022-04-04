@@ -13,12 +13,22 @@ function Home() {
     const [hints, setHints] = useState([]);
     const [hintsGiven, setHintsGiven] = useState([false, false, false])
     const [name, setName] = useState(null);
+    const [pendingSolution, setPendingSolution] = useState(null);
     const [quote, setQuote] = useState(null);
     const [randLetters, setRandLetters] = useState([])
     const [shuffledAlphabet, setShuffledAlphabet] = useState(null);
+    const [solution, setSolution] = useState(null);
 
 
     const { data, error, isLoading } = useFetch();
+
+    const updatePendingSolution = (char, value, i) => {
+        if (solution[i].match(value.toUpperCase())) {
+            return value.toUpperCase()
+        } else if (solution[i].match(value.toLowerCase())) {
+            return value.toLowerCase()
+        } else return char
+    }
 
     useEffect(() => {
         if (data) {
@@ -40,8 +50,10 @@ function Home() {
         }
     
         const encryptQuote = () => {
-            setCryptoQuote(quote.split('').map(letter => letter.replace(/[A-Za-z]/, encrypt(letter))).join(''))
-            setCryptoName(name.split('').map(letter => letter.replace(/[A-Za-z]/, encrypt(letter))).join(''))
+            setCryptoQuote(quote.split('').map(char => char.replace(/[A-Za-z]/, encrypt(char))).join(''))
+            setCryptoName(name.split('').map(char => char.replace(/[A-Za-z]/, encrypt(char))).join(''))
+            setPendingSolution((quote + " " + name).split('').map(char => char.replace(/[A-Za-z]/, '*')).join(''))
+            setSolution(quote + " " + name)
         }
         if (name && quote && shuffledAlphabet) encryptQuote()
     }, [quote, name, shuffledAlphabet])
@@ -54,17 +66,29 @@ function Home() {
         } 
     }, [hints])
 
+    useEffect(() => {
+        if (solution && pendingSolution) {
+            if (solution === pendingSolution) {
+                alert("You won!!!")
+            }
+        }
+    }, [pendingSolution])
+
     const handleChange = (e) => {
         let letter = document.getElementsByClassName(e.target.className)
         for (let i=0; i < letter.length; i++) {
             letter[i].value = e.target.value
             letter[i].style.color = "darkblue"
         }
+        setPendingSolution(pendingSolution.split('').map((char, i) => char.replace('*', updatePendingSolution(char, e.target.value, i))).join(''))
         
     }
 
     const handleClick = () => {
         const rand = Math.floor(Math.random() * 26)
+        if(solution === pendingSolution) {
+            return
+        }
         if (randLetters.includes(rand)) {
             handleClick()
         } else {
@@ -84,6 +108,7 @@ function Home() {
                         letter[i].value = alphabet[rand]
                         letter[i].style.color = "red"
                         letter[i].disabled = true
+                        setPendingSolution(pendingSolution.split('').map((char, i) => char.replace('*', updatePendingSolution(char, alphabet[rand], i))).join(''))
                     }
                 }
             }
