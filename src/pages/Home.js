@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import alphabet from '../utils/alphabet';
 import EncryptedText from '../components/EncryptedText'
 import fisherYatesShuffle from '../utils/fisherYatesShuffle';
+import Modal from '../components/Modal';
 import puzzle_bulb from '../assets/puzzle_bulb.png';
 import puzzle_bulb_clicked from '../assets/puzzle_bulb_clicked.png';
 import useFetch from '../hooks/useFetch';
@@ -18,16 +19,17 @@ function Home() {
     const [randLetters, setRandLetters] = useState([])
     const [shuffledAlphabet, setShuffledAlphabet] = useState(null);
     const [solution, setSolution] = useState(null);
+    const [visible, setVisible] = useState("hidden");
 
 
     const { data, error, isLoading } = useFetch();
 
     const updatePendingSolution = (char, value, i) => {
         if (solution[i].match(value.toUpperCase())) {
-            return value.toUpperCase()
+                return value.toUpperCase()
         } else if (solution[i].match(value.toLowerCase())) {
-            return value.toLowerCase()
-        } else return char
+                return value.toLowerCase() 
+        } else return char   
     }
 
     useEffect(() => {
@@ -42,10 +44,10 @@ function Home() {
     }, [])
 
     useEffect(() => {
-        const encrypt = (letter) => {
-            if (letter.match(/[A-Za-z]/)) {
-                if (letter === letter.toLowerCase()) return shuffledAlphabet[alphabet.indexOf(letter.toUpperCase())].toLowerCase()
-                if (letter === letter.toUpperCase()) return shuffledAlphabet[alphabet.indexOf(letter)]
+        const encrypt = (char) => {
+            if (char.match(/[A-Za-z]/)) {
+                if (char === char.toLowerCase()) return shuffledAlphabet[alphabet.indexOf(char.toUpperCase())].toLowerCase()
+                if (char === char.toUpperCase()) return shuffledAlphabet[alphabet.indexOf(char)]
             }  
         }
     
@@ -69,19 +71,19 @@ function Home() {
     useEffect(() => {
         if (solution && pendingSolution) {
             if (solution === pendingSolution) {
-                alert("You won!!!")
+                setVisible(true)
             }
         }
     }, [pendingSolution])
 
     const handleChange = (e) => {
+        console.log(e.target.value)
         let letter = document.getElementsByClassName(e.target.className)
         for (let i=0; i < letter.length; i++) {
             letter[i].value = e.target.value
             letter[i].style.color = "darkblue"
         }
-        setPendingSolution(pendingSolution.split('').map((char, i) => char.replace('*', updatePendingSolution(char, e.target.value, i))).join(''))
-        
+        setPendingSolution(pendingSolution.split('').map((char, i) => char.replace(/\*/, updatePendingSolution(char, e.target.value, i))).join(''))    
     }
 
     const handleClick = () => {
@@ -102,19 +104,19 @@ function Home() {
                     handleClick()
                 } else {
                     for (let i=0; i < letter.length; i++) {
-                        // console.log(letter)
-                        // console.log(randLetters)
-                        // console.log(rand, alphabet[rand], shuffledAlphabet[rand])
                         letter[i].value = alphabet[rand]
-                        letter[i].style.color = "red"
                         letter[i].disabled = true
+                        letter[i].style.color = 'green';
                         setPendingSolution(pendingSolution.split('').map((char, i) => char.replace('*', updatePendingSolution(char, alphabet[rand], i))).join(''))
                     }
                 }
             }
             setHints([...hints, alphabet[rand]])               
-        }     
-        
+        }      
+    }
+
+    const newGame = () => {
+        window.location.reload(false)
     }
 
     return (
@@ -138,6 +140,7 @@ function Home() {
                     <EncryptedText divName="author_div" words={cryptoName} onChange={(e) => handleChange(e)} />
                 </div>
             </div>}
+            {quote && name && <Modal name={name} onClick={newGame} quote={quote} visible={visible}/>}
         </div> 
     )
 }

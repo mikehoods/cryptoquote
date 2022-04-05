@@ -91,6 +91,42 @@ p.puzzle_p {
   height: 45px;
 }
 
+.modal {
+  background-color: #FFFFFF;
+  border: 1px solid #222831;
+  left: 50%;
+  margin: auto;
+  max-width: 300px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal h3 {
+  background-color: #FFD369;
+  margin: 0;
+  padding: 6px;
+}
+
+.solution {
+  padding: 8px;
+}
+
+.playAgain {
+  background-color: #FFFFFF;
+  border: none;
+  color: #222831;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 0;
+  padding: 10px;
+}
+
+.playAgain:hover {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 900px) {
   .header {
     padding: 0;
