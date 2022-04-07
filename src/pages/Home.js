@@ -55,7 +55,7 @@ function Home() {
             setCryptoQuote(quote.split('').map(char => char.replace(/[A-Za-z]/, encrypt(char))).join(''))
             setCryptoName(name.split('').map(char => char.replace(/[A-Za-z]/, encrypt(char))).join(''))
             setPendingSolution((quote + " " + name).split('').map(char => char.replace(/[A-Za-z]/, '*')).join(''))
-            setSolution(quote + " " + name)
+            setSolution((quote + name).toLowerCase().split('').map(char => char.replace(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~\s]/, "")).join(''))
         }
         if (name && quote && shuffledAlphabet) encryptQuote()
     }, [quote, name, shuffledAlphabet])
@@ -78,12 +78,19 @@ function Home() {
 
     const handleChange = (e) => {
         console.log(e.target.value)
+        console.log(document.getElementsByClassName("char_input"))
+        let inputElements = document.getElementsByClassName("char_input")
+        let placeholder = []
         let letter = document.getElementsByClassName(e.target.className)
         for (let i=0; i < letter.length; i++) {
-            letter[i].value = e.target.value
+            letter[i].value = e.target.value.toLowerCase()
             letter[i].style.color = "darkblue"
         }
-        setPendingSolution(pendingSolution.split('').map((char, i) => char.replace(/\*/, updatePendingSolution(char, e.target.value, i))).join(''))    
+        for (let i=0; i < inputElements.length; i++) {
+            placeholder[i] = inputElements[i].value
+        }
+        setPendingSolution(placeholder.join(''))
+        // setPendingSolution(pendingSolution.split('').map((char, i) => char.replace(/\*/, updatePendingSolution(char, e.target.value, i))).join(''))    
     }
 
     const handleClick = () => {
@@ -103,12 +110,17 @@ function Home() {
                 if (letter[0].value.toUpperCase() === alphabet[rand]) {
                     handleClick()
                 } else {
+                    let inputElements = document.getElementsByClassName("char_input")
+                    let placeholder = []
                     for (let i=0; i < letter.length; i++) {
-                        letter[i].value = alphabet[rand]
+                        letter[i].value = alphabet[rand].toLowerCase()
                         letter[i].disabled = true
-                        letter[i].style.color = 'green';
-                        setPendingSolution(pendingSolution.split('').map((char, i) => char.replace('*', updatePendingSolution(char, alphabet[rand], i))).join(''))
+                        letter[i].style.color = 'green'; 
                     }
+                    for (let i=0; i < inputElements.length; i++) {
+                        placeholder[i] = inputElements[i].value
+                    }
+                    setPendingSolution(placeholder.join(''))
                 }
             }
             setHints([...hints, alphabet[rand]])               
