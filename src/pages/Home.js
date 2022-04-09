@@ -21,21 +21,21 @@ function Home() {
     const [solution, setSolution] = useState(null);
     const [visible, setVisible] = useState("hidden");
 
-
     const { data, error, isLoading } = useFetch();
+    const newGame = () => window.location.reload(false)
+    const punctuation = /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~\s]/
 
-    const updatePendingSolution = (char, value, i) => {
-        if (solution[i].match(value.toUpperCase())) {
-                return value.toUpperCase()
-        } else if (solution[i].match(value.toLowerCase())) {
-                return value.toLowerCase() 
-        } else return char   
+    const updatePendingSolution = () => {
+        let inputElements = document.getElementsByClassName("char_input")
+        let placeholder = []
+        for (let i=0; i < inputElements.length; i++) placeholder[i] = inputElements[i].value
+        setPendingSolution(placeholder.join('')) 
     }
 
     useEffect(() => {
         if (data) {
             setQuote(data.content)
-            setName(data.authorSlug.split("-").map(str => str.replace(/\b\w+/g, function(s){return s.charAt(0).toUpperCase() + s.substr(1).toLowerCase();})).join(" "))
+            setName(data.authorSlug.split("-").map(str => str.replace(/\b\w+/g, str => {return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()})).join(" "))
         }   
     }, [data])
 
@@ -46,16 +46,17 @@ function Home() {
     useEffect(() => {
         const encrypt = (char) => {
             if (char.match(/[A-Za-z]/)) {
-                if (char === char.toLowerCase()) return shuffledAlphabet[alphabet.indexOf(char.toUpperCase())].toLowerCase()
-                if (char === char.toUpperCase()) return shuffledAlphabet[alphabet.indexOf(char)]
+                return (
+                    char === char.toLowerCase() ? shuffledAlphabet[alphabet.indexOf(char.toUpperCase())].toLowerCase()
+                    : shuffledAlphabet[alphabet.indexOf(char)]
+                )
             }  
         }
     
         const encryptQuote = () => {
             setCryptoQuote(quote.split('').map(char => char.replace(/[A-Za-z]/, encrypt(char))).join(''))
             setCryptoName(name.split('').map(char => char.replace(/[A-Za-z]/, encrypt(char))).join(''))
-            setPendingSolution((quote + " " + name).split('').map(char => char.replace(/[A-Za-z]/, '*')).join(''))
-            setSolution((quote + name).toLowerCase().split('').map(char => char.replace(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~\s]/, "")).join(''))
+            setSolution((quote + name).toLowerCase().split('').map(char => char.replace(punctuation, "")).join(''))
         }
         if (name && quote && shuffledAlphabet) encryptQuote()
     }, [quote, name, shuffledAlphabet])
@@ -77,20 +78,12 @@ function Home() {
     }, [pendingSolution])
 
     const handleChange = (e) => {
-        console.log(e.target.value)
-        console.log(document.getElementsByClassName("char_input"))
-        let inputElements = document.getElementsByClassName("char_input")
-        let placeholder = []
         let letter = document.getElementsByClassName(e.target.className)
         for (let i=0; i < letter.length; i++) {
             letter[i].value = e.target.value.toLowerCase()
             letter[i].style.color = "darkblue"
         }
-        for (let i=0; i < inputElements.length; i++) {
-            placeholder[i] = inputElements[i].value
-        }
-        setPendingSolution(placeholder.join(''))
-        // setPendingSolution(pendingSolution.split('').map((char, i) => char.replace(/\*/, updatePendingSolution(char, e.target.value, i))).join(''))    
+        updatePendingSolution()    
     }
 
     const handleClick = () => {
@@ -110,25 +103,16 @@ function Home() {
                 if (letter[0].value.toUpperCase() === alphabet[rand]) {
                     handleClick()
                 } else {
-                    let inputElements = document.getElementsByClassName("char_input")
-                    let placeholder = []
                     for (let i=0; i < letter.length; i++) {
                         letter[i].value = alphabet[rand].toLowerCase()
                         letter[i].disabled = true
                         letter[i].style.color = 'green'; 
                     }
-                    for (let i=0; i < inputElements.length; i++) {
-                        placeholder[i] = inputElements[i].value
-                    }
-                    setPendingSolution(placeholder.join(''))
+                    updatePendingSolution()
                 }
             }
             setHints([...hints, alphabet[rand]])               
         }      
-    }
-
-    const newGame = () => {
-        window.location.reload(false)
     }
 
     return (
