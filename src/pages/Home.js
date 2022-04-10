@@ -81,7 +81,7 @@ function Home() {
         let letter = document.getElementsByClassName(e.target.className)
         for (let i=0; i < letter.length; i++) {
             letter[i].value = e.target.value.toLowerCase()
-            letter[i].style.color = "darkblue"
+            letter[i].style.color = "#152238"
         }
         updatePendingSolution()    
     }
@@ -106,7 +106,7 @@ function Home() {
                     for (let i=0; i < letter.length; i++) {
                         letter[i].value = alphabet[rand].toLowerCase()
                         letter[i].disabled = true
-                        letter[i].style.color = 'green'; 
+                        letter[i].style.color = '#205C37'; 
                     }
                     updatePendingSolution()
                 }
