@@ -106,7 +106,7 @@ function Home() {
                     for (let i=0; i < letter.length; i++) {
                         letter[i].value = alphabet[rand].toLowerCase()
                         letter[i].disabled = true
-                        letter[i].style.color = '#205C37'; 
+                        letter[i].style.color = '#4ea24e'; 
                     }
                     updatePendingSolution()
                 }
