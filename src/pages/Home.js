@@ -34,8 +34,8 @@ function Home() {
 
     useEffect(() => {
         if (data) {
-            setQuote(data.content)
-            setName(data.authorSlug.split("-").map(str => str.replace(/\b\w+/g, str => {return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()})).join(" "))
+            setQuote(data.quote)
+            setName(data.slug.split("-").map(str => str.replace(/\b\w+/g, str => {return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()})).join(" "))
         }   
     }, [data])
 

@@ -7,17 +7,17 @@ const useFetch = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("https://api.quotable.io/random")
+        fetch("https://quotes-db-server.herokuapp.com/quotes/random/")
             .then(res => {
                 if(!res.ok) {
-                    console.log(res)
+                    console.log(res[0])
                     throw Error("Unable to fetch data")  
                 }
                 return res.json();
             })
             .then(data => {
-                console.log(data)
-                setData(data)
+                console.log(data[0])
+                setData(data[0])
                 setIsLoading(false)
                 setError(null)
             })
