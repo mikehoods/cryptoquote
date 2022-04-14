@@ -5,10 +5,10 @@ function Modal({name, onClick, quote, visible}) {
         <div className="modal" style={{visibility: visible}}>
             <h3>~ Puzzle Solved ~</h3>
             <div className="solution">
-                <p>"{quote}"</p>
-                <p>- {name}</p>
+                <p className="solution-quote">"{quote}"</p>
+                <p className="solution-name">- {name}</p>
             </div>
-            <button className="playAgain" onClick={onClick}>Play again</button>
+            <button className="playAgain" onClick={onClick}>New Game</button>
         </div>
     )
 }

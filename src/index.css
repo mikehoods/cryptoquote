@@ -5,7 +5,9 @@ body {
   font-family: 'EB Garamond', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #222831;
+  background: linear-gradient(to bottom left, #0093AB, #006778, #00AFC1, #0093AB);
+  color: #191A19;
+  height: 100vh;
 }
 
 .header {
@@ -38,7 +40,7 @@ body {
 }
 
 h1 {
-  color: #FFD369;
+  color: #FFD124;
   font-size: 3rem;
   margin: 1rem;
   text-align: center;
@@ -69,7 +71,7 @@ h1 {
   font-family: 'EB Garamond', serif;
   font-size: 24px;
   font-weight: 600;
-  margin: 0 4px;
+  margin: 0 2px;
   max-width: 1.5rem;
   text-align: center;
   padding: 4px;
@@ -95,6 +97,7 @@ p.puzzle_p {
 .modal {
   background-color: #FFFFFF;
   border: 1px solid #222831;
+  color: #222831;
   left: 50%;
   margin: auto;
   max-width: 300px;
@@ -105,22 +108,32 @@ p.puzzle_p {
 }
 
 .modal h3 {
-  background-color: #FFD369;
+  background-color: #FFD124;
+  font-weight: 900;
   margin: 0;
   padding: 6px;
 }
 
 .solution {
-  padding: 8px;
+  padding: 12px 12px 6px 12px;
+}
+
+.solution p {
+  margin: 10px;
+}
+
+.solution-name {
+  font-style: italic;
 }
 
 .playAgain {
-  background-color: #FFFFFF;
+  background-color: #0093AB;
   border: none;
-  color: #222831;
-  font-size: 1.5rem;
-  font-weight: 900;
-  margin: 0;
+  border-radius: 30px;
+  color: #FFFFFF;
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin-bottom: 12px;
   padding: 10px;
 }
 
@@ -160,6 +173,5 @@ p.puzzle_p {
 
   .char_input {
     font-size: 20px;
-    margin: 0 2px;
   }
 }

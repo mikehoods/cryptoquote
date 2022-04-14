@@ -82,7 +82,7 @@ function Home() {
         let letter = document.getElementsByClassName(e.target.className)
         for (let i=0; i < letter.length; i++) {
             letter[i].value = e.target.value.toLowerCase()
-            letter[i].style.color = "#152238"
+            letter[i].style.color = "#040303"
         }
         updatePendingSolution()    
     }
@@ -107,7 +107,7 @@ function Home() {
                     for (let i=0; i < letter.length; i++) {
                         letter[i].value = alphabet[rand].toLowerCase()
                         letter[i].disabled = true
-                        letter[i].style.color = '#4ea24e'; 
+                        letter[i].style.color = '#4E9F3D'; 
                     }
                     updatePendingSolution()
                 }
@@ -122,7 +122,7 @@ function Home() {
             {error && <div>{error}</div>}
             {cryptoQuote && cryptoName && <div>
                 <div className="header">
-                    <h1>Crypto Quote</h1>
+                    <h1>Say What?</h1>
                     <div>{hintsGiven.map((h, i) => {
                         return (
                             hintsGiven[i] === true ?
