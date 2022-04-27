@@ -30,6 +30,60 @@ body {
   cursor: not-allowed;
 }
 
+/* Loading Animation */
+.loading_container {
+  animation: loading 1s;
+  background-color: #FFFFFF;
+  margin-top: 20vh;
+}
+
+@keyframes loading {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.bouncer{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+.bouncer div{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #FFD124;
+  animation: bouncer 0.5s cubic-bezier(.19, .57, .3, .98) infinite alternate;
+}
+.bouncer div:nth-child(2){
+  animation-delay: 0.1s;
+  opacity: 0.8;
+}
+.bouncer div:nth-child(3){
+  animation-delay: 0.2s;
+  opacity: 0.6;
+}
+.bouncer div:nth-child(4){
+  animation-delay: 0.3s;
+  opacity: 0.4;
+}
+@keyframes bouncer{
+  from { transform: translateY(0) }
+  to { transform: translateY(-50px)}
+}
+
+.loading_p {
+  background-color: #EEEEEE;
+  color: #191A19;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 4px;
+  text-align: center;
+}
+
 .quote_container {
   background-color: #EEEEEE;
   border-radius: 10px;

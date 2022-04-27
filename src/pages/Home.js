@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import alphabet from '../utils/alphabet';
 import EncryptedText from '../components/EncryptedText'
 import fisherYatesShuffle from '../utils/fisherYatesShuffle';
+import Loading from '../components/Loading';
 import Modal from '../components/Modal';
 import puzzle_bulb from '../assets/puzzle_bulb.png';
 import puzzle_bulb_clicked from '../assets/puzzle_bulb_clicked.png';
@@ -118,7 +119,7 @@ function Home() {
 
     return (
         <div>
-            {isLoading && <div>{isLoading}</div>}
+            {isLoading && <Loading/>}
             {error && <div>{error}</div>}
             {cryptoQuote && cryptoName && <div>
                 <div className="header">
