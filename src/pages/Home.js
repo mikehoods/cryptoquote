@@ -138,7 +138,7 @@ function Home() {
                     <EncryptedText divName="author_div" words={cryptoName} onChange={(e) => handleChange(e)} />
                 </div>
             </div>}
-            {quote && name && <Modal name={name} onClick={newGame} quote={quote} visible={visible}/>}
+            {pendingSolution && <Modal name={name} onClick={newGame} quote={quote} visible={visible}/>}
         </div> 
     )
 }

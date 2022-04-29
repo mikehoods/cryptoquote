@@ -31,13 +31,13 @@ body {
 }
 
 /* Loading Animation */
-.loading_container {
-  animation: loading 1s;
+.bouncer_container {
+  animation: container 1s;
   background-color: #FFFFFF;
   margin-top: 20vh;
 }
 
-@keyframes loading {
+@keyframes container {
   0% {opacity: 0;}
   100% {opacity: 1;}
 }
@@ -47,7 +47,7 @@ body {
   justify-content: space-around;
   align-items: flex-end;
   width: 100px;
-  height: 100px;
+  height: 85px;
   margin: auto;
 }
 .bouncer div{
@@ -77,7 +77,7 @@ body {
 .loading_p {
   background-color: #EEEEEE;
   color: #191A19;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
   padding: 4px;
@@ -155,7 +155,7 @@ p.puzzle_p {
   left: 50%;
   margin: auto;
   max-width: 300px;
-  position: absolute;
+  position: fixed;
   text-align: center;
   top: 50%;
   transform: translate(-50%, -50%);
