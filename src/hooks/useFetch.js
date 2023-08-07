@@ -7,7 +7,7 @@ const useFetch = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("https://say-what-server.onrender.com/quotes/random/")
+        fetch("https://say-what-app-server.onrender.com/quotes/random/")
             .then(res => {
                 if(!res.ok) {
                     console.log(res[0])
